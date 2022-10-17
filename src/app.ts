@@ -19,6 +19,8 @@ app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
    });
 });
 
-AppDataSource.initialize();
+AppDataSource.initialize()
+   .then(() => console.log('Data Source has been initialized!'))
+   .catch((e) => console.error('Error during Data Source inicialization', e));
 
 export { app }
