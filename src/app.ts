@@ -3,6 +3,10 @@ import express, { NextFunction, Request, Response } from 'express'
 import { AppDataSource } from './database/AppDataSource';
 import { personRouter } from './routes/PersonRoutes';
 
+AppDataSource.initialize()
+   .then(() => console.log('Data Source has been initialized!'))
+   .catch((e) => console.error('Error during Data Source inicialization', e));
+
 const app = express();
 
 app.use(express.json());
@@ -18,9 +22,5 @@ app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
        stack: err.stack
    });
 });
-
-AppDataSource.initialize()
-   .then(() => console.log('Data Source has been initialized!'))
-   .catch((e) => console.error('Error during Data Source inicialization', e));
 
 export { app }
